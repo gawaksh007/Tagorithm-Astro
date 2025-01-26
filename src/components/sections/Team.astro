@@ -39,12 +39,10 @@ const team = [
 ];
 ---
 
-<Section id="about">
-  <div class="mt-[150px]">
+<Section id="team">
+  <div class="pb-40 pt-20"> <!-- Adjust this value based on your needs -->
     <SectionTitle sectionTitle="Team" description={description} />
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 grid-rows-2 gap-10"
-    >
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"> <!-- Added smaller gap -->
       {
         team.map((member, index) => (
           <TeamCard
@@ -57,7 +55,6 @@ const team = [
           />
         ))
       }
-    </div>
     </div>
   </div>
 </Section>
