@@ -3,7 +3,20 @@ import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
 
 const menuitems = [
   { href: '/about', label: 'About us' },
-  { href: '#services', label: 'Services' },
+  { 
+    href: '#services', 
+    label: 'Services',
+    children: [
+      { href: '/brand-communication', label: 'Brand Communication' },
+      { href: '/web-app-design', label: 'Web & App Design' },
+      { href: '/content-strategy', label: 'Content Strategy & Marketing' },
+      { href: '/digital-advertising', label: 'Digital Advertising & Media Buying' },
+      { href: '/business-seo', label: 'Business Findability & SEO' },
+      { href: '/social-media', label: 'Social Media & Community Management' },
+      { href: '/data-analytics', label: 'Data Analytics & Optimisation' },
+      { href: '/cro', label: 'Conversion Rate Optimisation (CRO)' },
+    ]
+  },
   { href: '#cases', label: 'Success Stories' },
   { href: '/pricing', label: 'Packages' },
   { href: '/articles', label: 'Blog'},
@@ -36,15 +49,27 @@ const navButton = { href: "#contact", label: 'Request a quote' };
         
         <nav class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0" id="menu-items">
           <ul class="font-medium flex flex-col p-4 lg:p-0 mt-4 border rounded-lg lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0">
-            {menuitems.map((item, index) => (
-              <li>
-                <a 
-                  href={item.href} 
-                  class="mobile-nav-link block py-2 px-3 text-black rounded lg:bg-transparent lg:p-0"
-                  data-close-menu="true"
-                >
-                  {item.label}
-                </a>
+            {menuitems.map((item) => (
+              <li class="relative group">
+                <div class="relative inline-block">
+                  <a href={item.href} class="block py-2 px-3 text-black hover:text-gray-600">
+                    {item.label}
+                  </a>
+                  {item.children && (
+                    <div class="absolute left-0 hidden group-hover:block hover:block bg-white border shadow-lg rounded-lg mt-0 py-2 w-72 z-50">
+                      <div class="pt-2"> <!-- Added padding to create seamless hover area -->
+                        {item.children.map((child) => (
+                          <a 
+                            href={child.href} 
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#B9FF66] hover:text-black transition-all duration-200 ease-in-out transform hover:translate-x-1"
+                          >
+                            {child.label}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </li>
             ))}
             <div class="lg:hidden flex items-center justify-center mt-3 gap-4">
@@ -97,3 +122,15 @@ const navButton = { href: "#contact", label: 'Request a quote' };
     });
   });
 </script>
+
+<style>
+  .group:hover .group-hover\:block,
+  .group-hover\:block:hover {
+    display: block !important;
+  }
+  
+  .group:hover .group-hover\:block {
+    margin-top: 0;
+    padding-top: 0.5rem;
+  }
+</style>
